@@ -1,7 +1,20 @@
-import javax.swing.*;
+//
+// Paul Hayter, Assignment 9
+//
+// CS1A, Anand Venkataraman, Fall 2016
+//
 
+/**
+ * Contains class Student and class StudentArrayUtilities with Foothill class
+ * for testing these.
+ * @author Paul Hayter
+ */
 public class Foothill
 {
+   /**
+    * Tests class Student and class StudentArrayUtilities.
+    * @param args not used
+    */
    public static void main (String[] args)
    {
       Student[] myClass16 = {
@@ -45,52 +58,80 @@ public class Foothill
       
       Student[] myClass0 = { };
 
-      System.out.println("\nArray containing largest odd number of Students");
+      // Test with array with largest even number of Students
+      System.out.println("Array containing largest even number of Students");
       System.out.println(StudentArrayUtilities.toString("Before: ", myClass16));
       StudentArrayUtilities.arraySort(myClass16);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass16));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by default (last name):", myClass16));
+      
       Student.setSortKey(Student.SORT_BY_FIRST);
       StudentArrayUtilities.arraySort(myClass16);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass16));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by first name:", myClass16));
+      
       Student.setSortKey(Student.SORT_BY_POINTS);
       StudentArrayUtilities.arraySort(myClass16);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass16));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by points:", myClass16));
+      
       Student.setSortKey(Student.SORT_BY_FIRST);
-      System.out.print("Median score of even class is: ");
+      System.out.print("Median score of largest even class is: ");
       System.out.println(StudentArrayUtilities.getMedianDestructive(myClass16));
+      
       if (Student.getSortKey() == Student.SORT_BY_FIRST)
          System.out.println("Successfully preserved sortKey");
       else
          System.out.println("FAILED to preserve sortKey");
 
+      // Test with array with largest odd number of Students
+      Student.setSortKey(Student.SORT_BY_LAST); // restore default 
       System.out.println("\nArray containing largest odd number of Students");
       System.out.println(StudentArrayUtilities.toString("Before: ", myClass15));
       StudentArrayUtilities.arraySort(myClass15);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass15));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by last name (default): ", myClass15));
+      
       Student.setSortKey(Student.SORT_BY_FIRST);
       StudentArrayUtilities.arraySort(myClass15);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass15));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by first name: ", myClass15));
+      
       Student.setSortKey(Student.SORT_BY_POINTS);
       StudentArrayUtilities.arraySort(myClass15);
-      System.out.println(StudentArrayUtilities.toString("After: ", myClass15));
+      System.out.println(StudentArrayUtilities.toString(
+            "After sort by points: ", myClass15));
+      
       Student.setSortKey(Student.SORT_BY_FIRST);
       System.out.print("Median score of odd class is: ");
       System.out.println(StudentArrayUtilities.getMedianDestructive(myClass15));
+      
       if (Student.getSortKey() == Student.SORT_BY_FIRST)
          System.out.println("Successfully preserved sortKey");
       else
          System.out.println("FAILED to preserve sortKey");  
       
-      System.out.println("\nTesting with array containing 1 Student");
+      // test Student array of size 1
+      System.out.println("\nTesting with array containing 1 Student"
+            + " (expect " + (double) myClass1[0].getTotalPoints() + ")");
       System.out.print("Median score is: ");
       System.out.println(StudentArrayUtilities.getMedianDestructive(myClass1));
 
-      System.out.println("\nTesting with array containing 0 Students");
+      // test Student array of size 0
+      System.out.println("\nTesting with array containing 0 Students"
+            + " (expect 0.0)");
       System.out.print("Median score is: ");
       System.out.println(StudentArrayUtilities.getMedianDestructive(myClass0)); 
    }
 } // end class Foothill
 
+/**
+ * One instance of this class manages a student name (first and last) along with
+ * their grade points. In addition to mutator and accessor methods, there are
+ * methods for comparing students by first name, last name and grade points, a
+ * a toString() method and a method for selecting comparison criterion.
+ * @author Paul Hayter (modified from code supplied in module 8)
+ */
 class Student
 {
    public static final String DEFAULT_NAME = "zz-error";
@@ -105,15 +146,20 @@ class Student
    private int totalPoints;
    private static int sortKey = SORT_BY_LAST;
 
-   // constructor requires parameters - no default supplied
+   /**
+    * Parameterized constructor.
+    * @param last String containing student last name.
+    * @param first String containing student first name.
+    * @param points int containing student grade points.
+    */
    public Student( String last, String first, int points)
    {
       if ( !setLastName(last) )
-         lastName = DEFAULT_NAME;
+         lastName = Student.DEFAULT_NAME;
       if ( !setFirstName(first) )
-         firstName = DEFAULT_NAME;
+         firstName = Student.DEFAULT_NAME;
       if ( !setPoints(points) )
-         totalPoints = DEFAULT_POINTS;   
+         totalPoints = Student.DEFAULT_POINTS;   
    }
 
    // accessors
@@ -123,6 +169,13 @@ class Student
    public static int getSortKey() { return sortKey; }
     
    // mutators
+   /**
+    * Returns true after setting sortKey with an acceptable value; otherwise
+    * returns false if key is unacceptable. Acceptable values are SORT_BY_FIRST,
+    * SORT_BY_LAST and SORT_BY_POINTS.
+    * @param key int containing key to be used for compareTwoStudents() method.
+    * @return specified boolean.
+    */
    public static boolean setSortKey(int key)
    {
       if (!Student.keyOK(key))
@@ -131,6 +184,12 @@ class Student
       return true;
    }
    
+   /**
+    * Returns true after setting lastName with an acceptable value; otherwise
+    * returns false if input last String is unacceptable.
+    * @param last String containing student last name.
+    * @return specified boolean.
+    */
    public boolean setLastName(String last)
    {
       if ( !Student.validString(last) )
@@ -139,6 +198,12 @@ class Student
       return true;
    }
 
+   /**
+    * Returns true after setting firstName with an acceptable value; otherwise
+    * returns false if input first String is unacceptable.
+    * @param first String containing student first name.
+    * @return specified boolean.
+    */
    public boolean setFirstName(String first)
    {
       if ( !Student.validString(first) )
@@ -147,6 +212,12 @@ class Student
       return true;
    }
 
+   /**
+    * Returns true after setting totalPoints with an acceptable value; otherwise
+    * returns false if input int pts is unacceptable.
+    * @param pts int containing student grade points.
+    * @return specified boolean.
+    */
    public boolean setPoints(int pts)
    {
       if ( !Student.validPoints(pts) )
@@ -156,7 +227,15 @@ class Student
    }
 
    // supporting methods
-   // could be an instance method and, if so, would take one parameter
+   /**
+    * Compares two students and returns 0 if they are the same, a negative int
+    * if firstStud is less than secondStud or a positive int if firstStud is
+    * greater than the secondStud. Method uses member field Student.sortKey to 
+    * determine which member field to use for comparison.
+    * @param firstStud Student object for comparison.
+    * @param secondStud Student object for comparison.
+    * @return specified int.
+    */
    public static int compareTwoStudents( Student firstStud, Student secondStud )
    {
       int result = 0;
@@ -179,6 +258,10 @@ class Student
    }
 
    @Override
+   /**
+    * Returns String with formatted member fields.
+    * @return specified String
+    */
    public String toString()
    {
       String resultString;
@@ -191,6 +274,12 @@ class Student
    }
    
    // validators
+   /**
+    * Returns true if int key is an acceptable value; otherwise returns false;
+    * Acceptable values are SORT_BY_FIRST, SORT_BY_LAST and SORT_BY_POINTS.
+    * @param key int containing key value to be checked.
+    * @return specified boolean.
+    */
    public static boolean keyOK(int key)
    {
       if (key == Student.SORT_BY_FIRST 
@@ -200,6 +289,12 @@ class Student
       return false;
    }
    
+   /**
+    * Returns true if String testStr is not null and first character is a letter
+    *  otherwise returns false.
+    * @param testStr String of student name (first or last) to be checked.
+    * @return specified boolean.
+    */
    private static boolean validString( String testStr )
    {
       if (testStr != null && Character.isLetter(testStr.charAt(0)))
@@ -207,6 +302,12 @@ class Student
       return false;
    }
 
+   /**
+    * Returns true if testPoints are within the valid range of 0 and MAX_POINTS,
+    * inclusive; otherwise returns false.
+    * @param testPoints int of student points to be checked for being in range.
+    * @return specified boolean.
+    */
    private static boolean validPoints( int testPoints )
    {
       if (testPoints >= 0 && testPoints <= Student.MAX_POINTS)
@@ -215,8 +316,19 @@ class Student
    }
 } // end class Student
 
+/**
+ * Class contains Student class utilities as static methods. The public methods
+ * include getMedianDestructive(), toString(), and arraySort().
+ * @author Paul Hayter (modified from code supplied in module 8)
+ */
 class StudentArrayUtilities
 {
+   /**
+    * Returns double containing median of points in the Student[] array. Input
+    * Student array ordering is destroyed; client sortKey is unaffected.
+    * @param array Student object array for calculation of median points.
+    * @return specified double.
+    */
    public static double getMedianDestructive(Student[] array)
    {
       if (array == null || array.length == 0)
@@ -232,12 +344,19 @@ class StudentArrayUtilities
       if (array.length % 2 == 1)
          return (double) array[array.length / 2].getTotalPoints();
       // else array contains even number of elements
-      int midPos = array.length / 2;
-      return (array[midPos].getTotalPoints() 
-            + array[midPos - 1].getTotalPoints()) / 2.0;
+      int midPosition = array.length / 2;
+      return (array[midPosition].getTotalPoints() 
+            + array[midPosition - 1].getTotalPoints()) / 2.0;
    }
    
-   public static String toString(String title, Student[] data)           // ??? NOT OVERRIDE; KEEPING PARAMETER LIST
+   /**
+    * Returns formatted String with title containing all Student array data.
+    * Note: does not override Java toString() default.
+    * @param title String title of formatted output String.
+    * @param data array of Student objects for the formatted output.
+    * @return specified String.
+    */
+   public static String toString(String title, Student[] data)
    {
       String output = title + "\n";
 
@@ -248,7 +367,15 @@ class StudentArrayUtilities
       return output;
    }
 
-   // returns true if a modification was made to the array
+   /**
+    * Moves largest value of Student array to index specified by top (except for
+    * those Student values already in positions between top+1 and data.length-1,
+    * inclusive). Sets boolean flag if a change to array is made.
+    * @param data array of Student objects.
+    * @param top index of top-most place in array to "float" largest Student to.
+    * @return true if a modification was made to the Student array; otherwise
+    * returns false.
+    */
    private static boolean floatLargestToTop(Student[] data, int top)
    {
       boolean changed = false;
@@ -266,7 +393,10 @@ class StudentArrayUtilities
       return changed;
    }
 
-   // public callable arraySort() - assumes Student class has a compareTo()
+   /**
+    * Sorts Student array; assumes Student class has compareTwoStudents().
+    * @param array Student objects array to be sorted.
+    */
    public static void arraySort(Student[] array)
    {
       for (int k = 0; k < array.length; k++)
