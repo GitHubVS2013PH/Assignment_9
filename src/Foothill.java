@@ -352,13 +352,16 @@ class StudentArrayUtilities
    /**
     * Returns formatted String with title containing all Student array data.
     * Note: does not override Java toString() default.
-    * @param title String title of formatted output String.
+    * @param title String title of formatted output String. If null, then no
+    * title is given.
     * @param data array of Student objects for the formatted output.
     * @return specified String.
     */
    public static String toString(String title, Student[] data)
    {
-      String output = title + "\n";
+      String output = "";
+      if (title != null)
+         output = title + "\n";
 
       // build the output string from the individual Students:
       for (int k = 0; k < data.length; k++)
