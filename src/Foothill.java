@@ -407,4 +407,157 @@ class StudentArrayUtilities
 } // end class StudentArrayUtilities
 
 /************************** RUN ************************************************
+Array containing largest even number of Students
+Before: 
+  smith, fred points: 95
+  bauer, jack points: 123
+  jacobs, carrie points: 195
+  renquist, abe points: 148
+  zz-error, trevor points: 108
+  perry, fred points: 225
+  loceff, fred points: 44
+  stollings, pamela points: 452
+  charters, rodney points: 295
+  le pen, marine points: 45
+  may, theresa points: 404
+  churchill, winston points: 498
+  putin, vladimir points: 299
+  erdgogan, recep points: 305
+  francis, pope points: 303
+  franco, francisco points: 43
+
+After sort by default (last name):
+  bauer, jack points: 123
+  charters, rodney points: 295
+  churchill, winston points: 498
+  erdgogan, recep points: 305
+  francis, pope points: 303
+  franco, francisco points: 43
+  jacobs, carrie points: 195
+  le pen, marine points: 45
+  loceff, fred points: 44
+  may, theresa points: 404
+  perry, fred points: 225
+  putin, vladimir points: 299
+  renquist, abe points: 148
+  smith, fred points: 95
+  stollings, pamela points: 452
+  zz-error, trevor points: 108
+
+After sort by first name:
+  renquist, abe points: 148
+  jacobs, carrie points: 195
+  franco, francisco points: 43
+  loceff, fred points: 44
+  perry, fred points: 225
+  smith, fred points: 95
+  bauer, jack points: 123
+  le pen, marine points: 45
+  stollings, pamela points: 452
+  francis, pope points: 303
+  erdgogan, recep points: 305
+  charters, rodney points: 295
+  may, theresa points: 404
+  zz-error, trevor points: 108
+  putin, vladimir points: 299
+  churchill, winston points: 498
+
+After sort by points:
+  franco, francisco points: 43
+  loceff, fred points: 44
+  le pen, marine points: 45
+  smith, fred points: 95
+  zz-error, trevor points: 108
+  bauer, jack points: 123
+  renquist, abe points: 148
+  jacobs, carrie points: 195
+  perry, fred points: 225
+  charters, rodney points: 295
+  putin, vladimir points: 299
+  francis, pope points: 303
+  erdgogan, recep points: 305
+  may, theresa points: 404
+  stollings, pamela points: 452
+  churchill, winston points: 498
+
+Median score of largest even class is: 210.0
+Successfully preserved sortKey
+
+Array containing largest odd number of Students
+Before: 
+  Man, Spider points: 180
+  smith, fred points: 95
+  bauer, jack points: 123
+  jacobs, carrie points: 195
+  renquist, abe points: 148
+  zz-error, trevor points: 108
+  perry, fred points: 225
+  loceff, fred points: 44
+  stollings, pamela points: 452
+  charters, rodney points: 295
+  cassar, john points: 321
+  le pen, marine points: 45
+  may, theresa points: 404
+  putin, vladimir points: 299
+  erdgogan, recep points: 305
+
+After sort by last name (default): 
+  bauer, jack points: 123
+  cassar, john points: 321
+  charters, rodney points: 295
+  erdgogan, recep points: 305
+  jacobs, carrie points: 195
+  le pen, marine points: 45
+  loceff, fred points: 44
+  Man, Spider points: 180
+  may, theresa points: 404
+  perry, fred points: 225
+  putin, vladimir points: 299
+  renquist, abe points: 148
+  smith, fred points: 95
+  stollings, pamela points: 452
+  zz-error, trevor points: 108
+
+After sort by first name: 
+  renquist, abe points: 148
+  jacobs, carrie points: 195
+  loceff, fred points: 44
+  perry, fred points: 225
+  smith, fred points: 95
+  bauer, jack points: 123
+  cassar, john points: 321
+  le pen, marine points: 45
+  stollings, pamela points: 452
+  erdgogan, recep points: 305
+  charters, rodney points: 295
+  Man, Spider points: 180
+  may, theresa points: 404
+  zz-error, trevor points: 108
+  putin, vladimir points: 299
+
+After sort by points: 
+  loceff, fred points: 44
+  le pen, marine points: 45
+  smith, fred points: 95
+  zz-error, trevor points: 108
+  bauer, jack points: 123
+  renquist, abe points: 148
+  Man, Spider points: 180
+  jacobs, carrie points: 195
+  perry, fred points: 225
+  charters, rodney points: 295
+  putin, vladimir points: 299
+  erdgogan, recep points: 305
+  cassar, john points: 321
+  may, theresa points: 404
+  stollings, pamela points: 452
+
+Median score of odd class is: 195.0
+Successfully preserved sortKey
+
+Testing with array containing 1 Student (expect 199.0)
+Median score is: 199.0
+
+Testing with array containing 0 Students (expect 0.0)
+Median score is: 0.0
 *******************************************************************************/
